@@ -16,9 +16,13 @@ class FilePackageStorage(PackageStorage):
         platform = package.platform()
 
         if package.platform().system() == "windows":
-            return f"{self._storage_path}/{name}-{version}-{platform.system()}-{platform.architecture()}.exe"
+            return os.path.abspath(
+                f"{self._storage_path}/{name}-{version}-{platform.system()}-{platform.architecture()}.exe"
+            )
 
-        return f"{self._storage_path}/{name}-{version}-{platform.system()}-{platform.architecture()}"
+        return os.path.abspath(
+            f"{self._storage_path}/{name}-{version}-{platform.system()}-{platform.architecture()}"
+        )
 
     def save_package(self, package: PackageDefinition, data: bytes) -> None:
         path = self.resolve_package_path(package)

@@ -1,4 +1,5 @@
 import os
+import platform
 
 
 class PackagePlatform:
@@ -7,12 +8,12 @@ class PackagePlatform:
         system = (
             os.environ["PYCKAGIST_PLATFORM_SYSTEM"]
             if "PYCKAGIST_PLATFORM_SYSTEM" in os.environ
-            else os.uname().sysname.lower()
+            else platform.uname().system.lower()
         )
         architecture = (
             os.environ["PYCKAGIST_PLATFORM_ARCHITECTURE"]
             if "PYCKAGIST_PLATFORM_ARCHITECTURE" in os.environ
-            else os.uname().machine.lower()
+            else platform.uname().machine.lower()
         )
 
         return PackagePlatform(system, architecture)

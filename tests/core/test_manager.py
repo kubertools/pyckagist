@@ -1,3 +1,5 @@
+import os.path
+
 import pytest
 
 from pyckagist.api.source import PackageSource
@@ -189,5 +191,5 @@ class TestPackageManagerBuilder:
 
         assert (
             package_manager.controller()._package_lifecycle_manager._manifest._data_file
-            == "/test/path/packages.json"
+            == os.path.abspath("/test/path/packages.json")
         )
