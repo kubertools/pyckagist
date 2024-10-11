@@ -23,7 +23,9 @@ class TestFilePackageStorage:
 
         storage = FilePackageStorage("/fake/path")
 
-        expected_path_windows = os.path.abspath("/fake/path/testpkg-1.0.0-windows-x86_64.exe")
+        expected_path_windows = os.path.abspath(
+            "/fake/path/testpkg-1.0.0-windows-x86_64.exe"
+        )
         expected_path_linux = os.path.abspath("/fake/path/testpkg-1.0.0-linux-x86_64")
 
         assert storage.resolve_package_path(package_windows) == expected_path_windows
@@ -42,8 +44,12 @@ class TestFilePackageStorage:
 
         storage.delete_package(package)
 
-        exists_mock.assert_called_once_with(os.path.abspath("/fake/path/testpkg-1.0.0-system-arch"))
-        remove_mock.assert_called_once_with(os.path.abspath("/fake/path/testpkg-1.0.0-system-arch"))
+        exists_mock.assert_called_once_with(
+            os.path.abspath("/fake/path/testpkg-1.0.0-system-arch")
+        )
+        remove_mock.assert_called_once_with(
+            os.path.abspath("/fake/path/testpkg-1.0.0-system-arch")
+        )
 
     def test_load_package_data_correctly(self, mocker):
         mocker.patch("os.makedirs")
